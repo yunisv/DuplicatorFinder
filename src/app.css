@@ -1,0 +1,47 @@
+.ant-layout {
+    background: linear-gradient(to bottom, #FFFFFF, #E0E0E0);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.ant-input {
+    color: rgba(255, 80, 0);
+    font-weight: 500
+}
+
+.ant-input:focus {
+    border: 1px solid #FF5000FF;
+    /*box-shadow: 0 0 0 2px rgba(255, 80, 0);*/
+}
+
+.ant-input:hover {
+    border-color: rgba(255, 80, 0);
+}
+.ant-input-search .ant-input:focus {
+    border-color: rgba(255, 80, 0);
+}
+
+.ant-input-search .ant-input:hover, .ant-input-search .ant-input:focus {
+    border-color: rgba(255, 80, 0);
+}
+
+.ant-input-search >.ant-input-group >.ant-input-group-addon:last-child .ant-input-search-button:not(.ant-btn-primary):active {
+    color: rgba(255, 80, 0);
+}
+
+.ant-btn-default:not(:disabled):active {
+    border-color: rgba(255, 80, 0);
+}
+
+.ant-input-search >.ant-input-group >.ant-input-group-addon:last-child .ant-input-search-button:not(.ant-btn-primary):hover {
+    color: rgba(255, 80, 0);
+}
+
+.ant-btn-default:not(:disabled):hover {
+    border-color: rgba(255, 80, 0);
+}
+
+.ant-btn-default:not(:disabled):hover {
+    color: rgba(255, 80, 0);
+}
