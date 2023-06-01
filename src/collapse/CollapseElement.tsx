@@ -13,7 +13,7 @@ const CollapseElement: React.FC = () => {
         // console.log(key);
     };
 
-    const {listDuplicate} = useSelector((state: any)=> state.dataDuplicate)
+    const {dataDuplicate} = useSelector((state: any)=> state.listDuplicate)
 
     const fileInfo = (name: string, hash: string) => (
         <div className={styles.collapseBox}>
@@ -28,7 +28,7 @@ const CollapseElement: React.FC = () => {
         </div>
     );
 
-    const panelItems: (JSX.Element | null)[] = Object.entries(listDuplicate).map(([key, value]) => {
+    const panelItems: (JSX.Element | null)[] = Object.entries(dataDuplicate.listDuplicateFiles).map(([key, value]) => {
         if (Array.isArray(value)) {
             return (
                 <Panel

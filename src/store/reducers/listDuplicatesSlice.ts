@@ -3,7 +3,7 @@ import {fetchList} from "./ActionCreator";
 
 const initialState = {
     dataDuplicate: {
-        listDuplicate: [],
+        listDuplicateFiles: [],
         duplicate_count: 0
     },
     isLoading: false,
@@ -22,7 +22,8 @@ const listDuplicateSlice = createSlice({
         },
         listFetchingSuccess(state: any, action) {
             state.isLoading = false
-            state.dataDuplicate.listDuplicate = action.payload
+            state.dataDuplicate.listDuplicateFiles = action.payload.list_of_files
+            state.dataDuplicate.duplicate_count = action.payload.duplicate_count
         },
         listFetchingError(state: any) {
             state.isLoading = false
@@ -36,12 +37,14 @@ const listDuplicateSlice = createSlice({
         [fetchList.fulfilled.type]: (state, action) => {
             state.error = false
             state.isLoading = false;
-            state.dataDuplicate.listDuplicate = action.payload
+            state.dataDuplicate.listDuplicateFiles = action.payload.list_of_files
+            state.dataDuplicate.duplicate_count = action.payload.duplicate_count
         },
         [fetchList.rejected.type]: (state, action) => {
             state.isLoading = false;
             state.error = true;
-            state.dataDuplicate.listDuplicate = []
+            state.dataDuplicate.listDuplicateFiles = []
+            state.dataDuplicate.duplicate_count = 0
         }
     }
 });
