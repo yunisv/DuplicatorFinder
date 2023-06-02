@@ -4,6 +4,7 @@ import speedometerReducer from "./reducers/speedometerSlice";
 import searchInputReducer from "./reducers/searchInputSlice"
 import listDuplicateSlice from "./reducers/listDuplicatesSlice";
 import deleteFilesSlice from "./reducers/deleteFilesSlice"
+import openFileSlice from "./reducers/openFileSlice";
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         speedometerValue: speedometerReducer,
         searchInput: searchInputReducer,
         listDuplicate: listDuplicateSlice,
-        deleteDuplicateFiles: deleteFilesSlice
+        deleteDuplicateFiles: deleteFilesSlice,
+        openFile: openFileSlice
     },
 });
 

@@ -1,11 +1,18 @@
 .collapseBox {
     display: flex;
     flex-direction: column;
+    text-overflow: ellipsis;
+    width: 85%;
+}
+
+.collapseHeaderBox {
 }
 
 .fileName {
     font-size: 16px;
     font-weight: bold;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .hashName {

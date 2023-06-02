@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import {Checkbox, Divider, Button, message, Popconfirm} from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
-import { DeleteOutlined } from '@ant-design/icons';
+import {DeleteOutlined, FolderOpenOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteDuplicateFiles, fetchList} from "../store/reducers/ActionCreator";
+import {deleteDuplicateFiles, fetchList, openFile} from "../store/reducers/ActionCreator";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -23,17 +23,38 @@ const CollapseItem: React.FC<collapseItemElementType> = (props) => {
     const dispatch = useDispatch();
     const searchValue = useSelector((state: any) => state.searchInput)
 
-    const success = () => {
+    const successDelete = () => {
         messageApi.open({
             type: 'success',
             content: 'Files deleted successfully',
         });
     };
 
-    const error = () => {
+    const errorDelete = () => {
         messageApi.open({
             type: 'error',
             content: 'Error when deleting files',
+        });
+    };
+
+    const successOpen = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Files opened successfully',
+        });
+    };
+
+    const errorOpen = (message: string) => {
+        messageApi.open({
+            type: 'error',
+            content: 'Error when opening file',
+        });
+    };
+
+    const warningOpen = () => {
+        messageApi.open({
+            type: 'warning',
+            content: 'Please select only one file to open',
         });
     };
 
@@ -61,7 +82,7 @@ const CollapseItem: React.FC<collapseItemElementType> = (props) => {
                 onConfirm={() => {
                     console.log(checkedList);
                     // @ts-ignore
-                    dispatch(deleteDuplicateFiles({fileUrls: checkedList, successFunc: success, errorFunc: error}));
+                    dispatch(deleteDuplicateFiles({fileUrls: checkedList, successFunc: successDelete, errorFunc: errorDelete}));
                     // @ts-ignore
                     dispatch(fetchList(searchValue))
                 }}
@@ -70,6 +91,17 @@ const CollapseItem: React.FC<collapseItemElementType> = (props) => {
             >
                 <Button icon={<DeleteOutlined />}>Delete duplicate files</Button>
             </Popconfirm>
+            <Button style={{marginLeft: 5}} icon={<FolderOpenOutlined />} onClick={() => {
+                console.log(checkedList);
+                if (checkedList.length === 1) {
+                    // @ts-ignore
+                    dispatch(openFile({path: checkedList[0], successFunc: successOpen, errorFunc: errorOpen}));
+                    // @ts-ignore
+                    dispatch(fetchList(searchValue))
+                } else {
+                    warningOpen()
+                }
+            }}>Open file</Button>
             <Divider />
             <CheckboxGroup style={{display: "flex", flexDirection: "column"}} options={props.listFiles} value={checkedList} onChange={onChange} />
         </div>

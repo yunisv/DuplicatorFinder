@@ -11,8 +11,25 @@ export const fetchList = createAsyncThunk('listDuplicates/fetchList', async (pat
     }
 });
 
+export const openFile = createAsyncThunk('listDuplicates/openFile', async ( {path, successFunc, errorFunc}: OpenFilesPayload) => {
+    try {
+        const response = await axios.get(`http://127.0.0.1:5000/openFile?file_dir=${path}`);
+        console.log(response.data);
+        successFunc()
+    } catch (error: any) {
+        errorFunc()
+        throw new Error(error.message);
+    }
+});
+
 interface DeleteDuplicateFilesPayload {
     fileUrls: string[];
+    successFunc: () => void;
+    errorFunc: () => void;
+}
+
+interface OpenFilesPayload {
+    path: string,
     successFunc: () => void;
     errorFunc: () => void;
 }
@@ -30,6 +47,7 @@ export const deleteDuplicateFiles = createAsyncThunk('listDuplicates/deleteDupli
                 console.error(error);
             });
     } catch (error: any) {
+        errorFunc()
         throw new Error(error.message);
     }
 });

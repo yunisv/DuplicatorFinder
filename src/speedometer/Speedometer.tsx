@@ -5,14 +5,15 @@ import {changeSpeedometerValue} from "../store/reducers/speedometerSlice";
 
 const Speedometer = () => {
     const speedometerValue = useSelector((state: any) => state.speedometerValue)
+    const {dataDuplicate} = useSelector((state: any)=> state.listDuplicate)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(changeSpeedometerValue(30))
     })
     return(
         <>
-            <div className={styles.el} id="el" data-value={"1400/1400"}>
-                <span className={styles.span} style={{transform: `rotate(${speedometerValue}deg)`}} id="needle"></span>
+            <div className={styles.el} id="el" data-value={`${dataDuplicate.duplicate_count}/${dataDuplicate.total_files}`}>
+                <span className={styles.span} style={{transform: `rotate(${dataDuplicate.duplicate_percentage * 1.8}deg)`}} id="needle"></span>
             </div>
             <strong className={styles.speedometer_hover}>Duplicate files finder</strong>
         </>

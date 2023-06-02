@@ -45,3 +45,7 @@
 .ant-btn-default:not(:disabled):hover {
     color: rgba(255, 80, 0);
 }
+
+.ant-collapse>.ant-collapse-item >.ant-collapse-header .ant-collapse-header-text {
+    width: 85%;
+}

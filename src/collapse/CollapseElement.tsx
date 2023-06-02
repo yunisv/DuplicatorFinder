@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Collapse } from 'antd';
 import {ExpandIconPosition} from "antd/es/collapse/Collapse";
 import styles from "./collapseElement.module.css"
+import "./collapse.css"
 import CollapseItem from "./CollapseItem";
 import {useSelector} from "react-redux";
 
@@ -22,9 +23,9 @@ const CollapseElement: React.FC = () => {
         </div>
     );
 
-    const genExtra = () => (
+    const genExtra = (col: number) => (
         <div className={styles.duplicateNumberBox}>
-            <span className={styles.duplicateNumber}>123</span>
+            <span className={styles.duplicateNumber}>{col}</span>
         </div>
     );
 
@@ -34,7 +35,7 @@ const CollapseElement: React.FC = () => {
                 <Panel
                     header={fileInfo(value[0] as string, key)}
                     key={value[0]}
-                    extra={genExtra()}
+                    extra={genExtra(value.length)}
                 >
                     <CollapseItem listFiles={value} />
                 </Panel>
