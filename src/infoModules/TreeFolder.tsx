@@ -1,31 +1,33 @@
 import React from 'react';
-import {Tree, Layout} from 'antd';
+import {Tree, Layout, Button} from 'antd';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changeSearchInputValue} from "../store/reducers/searchInputSlice";
+import {DeleteOutlined, FolderViewOutlined} from "@ant-design/icons";
+import {fetchDirectoryTree, fetchList} from "../store/reducers/ActionCreator";
 
 const { DirectoryTree } = Tree;
 const { Sider } = Layout;
 
 
-const treeData: DataNode[] = [
-    {
-        title: 'parent 0',
-        key: '0-0',
-        children: [
-            { title: 'leaf 0-0', key: '0-0-0', isLeaf: true },
-            { title: 'leaf 0-1', key: '0-0-1', isLeaf: true },
-        ],
-    },
-    {
-        title: 'parent 1',
-        key: '0-1',
-        children: [
-            { title: 'leaf 1-0', key: '0-1-0', isLeaf: true },
-            { title: 'leaf 1-1', key: '0-1-1', isLeaf: true },
-        ],
-    },
-];
+// const treeData: DataNode[] = [
+//     {
+//         title: 'parent 0',
+//         key: '0-0',
+//         children: [
+//             { title: 'leaf 0-0', key: '0-0-0', isLeaf: true },
+//             { title: 'leaf 0-1', key: '0-0-1', isLeaf: true },
+//         ],
+//     },
+//     {
+//         title: 'parent 1',
+//         key: '0-1',
+//         children: [
+//             { title: 'leaf 1-0', key: '0-1-0', isLeaf: true },
+//             { title: 'leaf 1-1', key: '0-1-1', isLeaf: true },
+//         ],
+//     },
+// ];
 const TreeFolder: React.FC = () => {
     const dispatch = useDispatch();
 
@@ -38,15 +40,20 @@ const TreeFolder: React.FC = () => {
         console.log('Trigger Expand', keys, info);
     };
 
+    const {isLoading, error, directoryTree } = useSelector((state: any) => state.directoryTree)
+    const searchValue = useSelector((state: any) => state.searchInput)
+
     return (
         <Sider width={200} style={{ background: "transparent" }}>
-            <DirectoryTree
+            <Button onClick={() => { // @ts-ignore
+                dispatch(fetchDirectoryTree(searchValue))}} icon={<FolderViewOutlined />}>Show tree directory</Button>
+            {isLoading && <span>Loading...</span>}
+            {directoryTree.length !== 0 && <DirectoryTree
                 multiple
-                defaultExpandAll
                 onSelect={onSelect}
                 onExpand={onExpand}
-                treeData={treeData}
-            />
+                treeData={directoryTree}
+            />}
         </Sider>
     );
 };

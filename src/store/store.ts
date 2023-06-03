@@ -5,6 +5,7 @@ import searchInputReducer from "./reducers/searchInputSlice"
 import listDuplicateSlice from "./reducers/listDuplicatesSlice";
 import deleteFilesSlice from "./reducers/deleteFilesSlice"
 import openFileSlice from "./reducers/openFileSlice";
+import directoryTreeSlice from "./reducers/directoryTreeSlice"
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         searchInput: searchInputReducer,
         listDuplicate: listDuplicateSlice,
         deleteDuplicateFiles: deleteFilesSlice,
-        openFile: openFileSlice
+        openFile: openFileSlice,
+        directoryTree: directoryTreeSlice
     },
 });
 

@@ -40,7 +40,7 @@ const CollapseItem: React.FC<collapseItemElementType> = (props) => {
     const warningDelete = () => {
         messageApi.open({
             type: 'warning',
-            content: 'Please select files for deleting',
+            content: 'Please select files for deleting (also need to safe 1 file)',
         });
     };
 
@@ -87,7 +87,7 @@ const CollapseItem: React.FC<collapseItemElementType> = (props) => {
                 title="Delete the files"
                 description="Are you sure to delete this files?"
                 onConfirm={() => {
-                   if (checkedList.length !== 0) {
+                   if (checkedList.length !== 0 && !checkAll) {
                        console.log(checkedList);
                        // @ts-ignore
                        dispatch(deleteDuplicateFiles({fileUrls: checkedList, successFunc: successDelete, errorFunc: errorDelete}));
