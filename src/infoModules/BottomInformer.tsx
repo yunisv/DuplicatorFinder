@@ -15,7 +15,7 @@ const BottomInformer: React.FC = () => {
     const deleteAll = () => {
         let result: string[] = []
         // @ts-ignore
-        Object.values(dataDuplicate.listDuplicateFiles).map((value: string[], index, array) => {
+        Object.values(dataDuplicate.listDuplicateFiles).map((value: string[]) => {
             value.map((value, index) => {
                 if (index !== 0) {
                     result.push(value)
@@ -29,25 +29,26 @@ const BottomInformer: React.FC = () => {
         messageApi.open({
             type: 'success',
             content: 'Files deleted successfully',
-        });
+        }).then(() => {});
     };
 
     const errorDelete = () => {
         messageApi.open({
             type: 'error',
             content: 'Error when deleting files',
-        });
+        }).then(() => {});
     };
 
 
     return (
         (
             <div className={styles.container}>
+                {contextHolder}
                 <Descriptions>
                     <Descriptions.Item label="Search path">{search_path}</Descriptions.Item>
                 </Descriptions>
                 <Descriptions>
-                    <Descriptions.Item label="Spent time">2.79 seconds</Descriptions.Item>
+                    <Descriptions.Item label="Spent time">{dataDuplicate.duration.toFixed(3)} seconds</Descriptions.Item>
                 </Descriptions>
                 <Popconfirm
                     title="Delete the files"

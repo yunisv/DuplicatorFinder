@@ -51,7 +51,7 @@ const CollapseItem: React.FC<collapseItemElementType> = (props) => {
         });
     };
 
-    const errorOpen = (message: string) => {
+    const errorOpen = () => {
         messageApi.open({
             type: 'error',
             content: 'Error when opening file',

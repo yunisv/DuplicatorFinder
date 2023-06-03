@@ -4,7 +4,6 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 export const fetchList = createAsyncThunk('listDuplicates/fetchList', async (path: string) => {
     try {
         const response = await axios.get(`http://127.0.0.1:5000/getDuplicateFiles?dir=${path}`);
-        console.log(response.data)
         return response.data;
     } catch (error: any) {
         throw new Error(error.message);

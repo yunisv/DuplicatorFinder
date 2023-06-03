@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import { incrementNumber, decrementNumber } from "./store/reducers/counter";
-import {Layout } from "antd";
+import React from 'react';
+import { useSelector} from "react-redux";
+import {Layout, Spin} from "antd";
 import Speedometer from "./speedometer/Speedometer";
 
 import styles from "./app.module.css"
@@ -11,26 +10,18 @@ import DirectoryInformer from "./infoModules/DirectoryInformer";
 import TreeFolder from "./infoModules/TreeFolder";
 import BottomInformer from "./infoModules/BottomInformer";
 import CollapseElement from "./collapse/CollapseElement";
-import {fetchList} from "./store/reducers/ActionCreator";
 
 function App() {
-  // const counter = useSelector((state: any) => state.counter)
-  const dispatch = useDispatch();
-  const {isLoading, error, listDuplicate} = useSelector((state: any)=> state.listDuplicate)
-
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   dispatch(fetchList())
-  // }, [ ])
+  const {isLoading} = useSelector((state: any)=> state.listDuplicate)
 
   return (
     <div className="App">
       <Layout style={{backgroundColor: "#fff"}} className="layout">
         <TreeFolder />
         <div className={styles.content}>
-          {isLoading && <h1>LOADING</h1>}
-          {error && <h1>ERROR</h1>}
-          {/*{listDuplicate.length !== 0 && JSON.stringify(listDuplicate)}*/}
+          {isLoading && <Spin style={{marginTop: 30}} tip="Loading" size="large">
+            <div className="content" />
+          </Spin>}
           <Speedometer />
           <div className={styles.informersDiv}>
             <SearchInput />
@@ -40,13 +31,7 @@ function App() {
           <div className={styles.collapseDiv} >
             <CollapseElement />
           </div>
-          {/*<p>*/}
-          {/*  Counter: {counter}*/}
-          {/*</p>*/}
-          {/*<button onClick={() => {dispatch(incrementNumber(3))}}>Add + 1</button>*/}
-          {/*<button onClick={() => {dispatch(decrementNumber())}}>Add - 1</button>*/}
         </div>
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
       </Layout>
     </div>
   );
