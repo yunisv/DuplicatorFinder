@@ -10,12 +10,14 @@ import DirectoryInformer from "./infoModules/DirectoryInformer";
 import TreeFolder from "./infoModules/TreeFolder";
 import BottomInformer from "./infoModules/BottomInformer";
 import CollapseElement from "./collapse/CollapseElement";
+import Links from "./Links/Links";
 
 function App() {
   const {isLoading} = useSelector((state: any)=> state.listDuplicate)
 
   return (
     <div className="App">
+      <Links />
       <Layout style={{backgroundColor: "#fff"}} className="layout">
         <TreeFolder />
         <div className={styles.content}>
